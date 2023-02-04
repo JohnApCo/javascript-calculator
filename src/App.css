@@ -66,9 +66,11 @@ body {
   background-image: url("https://www.toptal.com/designers/subtlepatterns/uploads/carbon_fibre.png");
   background-image: url("https://www.toptal.com/designers/subtlepatterns/uploads/moroccan-flower.png");
   /* background-image: url("https://www.toptal.com/designers/subtlepatterns/uploads/oriental-tiles.png"); */
-  /* background-size: 50vw; */
-  /* background-size: cover;
-  background-position: center; */
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default;
 }
 
 /* ******************** Headings *********************/
@@ -227,14 +229,7 @@ h6,
   font-size: 1.2rem;
   opacity: 1;
 }
-.calculator__button:active {
-  opacity: 0.7;
-}
-
-.calculator__button-inactive {
-  opacity: 1;
-}
-
+.calculator__button:active,
 .calculator__button-active {
   opacity: 0.7;
 }
