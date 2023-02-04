@@ -1,38 +1,275 @@
-.App {
-  text-align: center;
-}
+/* ******************** Fluid Reset ******************** */
+/* @link https://utopia.fyi/type/calculator?c=320,17,1.125,1920,20,1.333,6,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l */
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+  --step--2: clamp(0.78rem, calc(0.79rem + -0.01vw), 0.79rem);
+  --step--1: clamp(0.89rem, calc(0.88rem + 0.06vw), 0.94rem);
+  --step-0: clamp(1rem, calc(0.97rem + 0.16vw), 1.13rem);
+  --step-1: clamp(1.13rem, calc(1.07rem + 0.29vw), 1.35rem);
+  --step-2: clamp(1.27rem, calc(1.18rem + 0.45vw), 1.62rem);
+  --step-3: clamp(1.42rem, calc(1.29rem + 0.66vw), 1.94rem);
+  --step-4: clamp(1.6rem, calc(1.42rem + 0.93vw), 2.33rem);
+  --step-5: clamp(1.8rem, calc(1.55rem + 1.27vw), 2.8rem);
+}
+/* ******************** Custom Properties ******************** */
+:root {
+  --font-text-600: "Lora", sans-serif;
+
+  --font: "Poppins";
+  --container-sm: 768px;
+  --container-md: 992px;
+  --container-lg: 1200px;
+
+  --text-color: #aaa;
+  --primary-main: #35cac5;
+  --primary-dark: #1b1613; /* 3f3f3f */
+
+  --bg-color: #1b1613;
+
+  --white: #fff;
+  --gray-dark: #4b4b4b;
+}
+/* ******************** Reset CSS ******************** */
+html {
+  box-sizing: border-box;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  html {
+    scroll-behavior: smooth;
   }
 }
 
-.App-header {
-  background-color: #282c34;
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  color: var(--text-color);
+  /* background-color: var(--white); */
+  font: 400 var(--step-0) / 1.6 var(--font), sans-serif;
+  text-rendering: optimizeSpeed;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  background-image: url("https://www.toptal.com/designers/subtlepatterns/uploads/carbon_fibre.png");
+  background-image: url("https://www.toptal.com/designers/subtlepatterns/uploads/moroccan-flower.png");
+  /* background-image: url("https://www.toptal.com/designers/subtlepatterns/uploads/oriental-tiles.png"); */
+  /* background-size: 50vw; */
+  /* background-size: cover;
+  background-position: center; */
+}
+
+/* ******************** Headings *********************/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-text-600);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0.5em 0;
+}
+
+h1,
+.step-5 {
+  font-size: var(--step-5);
+}
+
+h2,
+.step-4 {
+  font-size: var(--step-4);
+}
+
+h3,
+.step-3 {
+  font-size: var(--step-3);
+}
+
+h4,
+.step-2 {
+  font-size: var(--step-2);
+}
+
+h5,
+.step-1 {
+  font-size: var(--step-1);
+}
+
+h6,
+.step-0 {
+  font-size: var(--step-0);
+}
+
+.step--1 {
+  font-size: var(--step--1);
+}
+
+.step--2 {
+  font-size: var(--step--2);
+}
+/********************* Container ****************/
+.calculator {
+  text-align: center;
+  background-color: var(--bg-color); /* var(--primary-dark); */
+  /* width: var(--container-sm); */
+  /* max-width: 95%; */
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 1rem;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 50%); /* inset 0px 0px 3px rgb(255 255 255 / 40%); */
+  padding: 1.5rem;
+  color: var(--text-color);
+}
+
+#equals {
+  grid-area: equals;
+}
+#zero {
+  grid-area: zero;
+}
+#one {
+  grid-area: one;
+}
+#two {
+  grid-area: two;
+}
+#three {
+  grid-area: three;
+}
+#four {
+  grid-area: four;
+}
+#five {
+  grid-area: five;
+}
+#six {
+  grid-area: six;
+}
+#seven {
+  grid-area: seven;
+}
+#eight {
+  grid-area: eight;
+}
+#nine {
+  grid-area: nine;
+}
+
+#clear {
+  grid-area: clear;
+  background-color: red;
+}
+#multiply {
+  grid-area: multiply;
+}
+#divide {
+  grid-area: divide;
+}
+#add {
+  grid-area: add;
+}
+#subtract {
+  grid-area: subtract;
+}
+#decimal {
+  grid-area: decimal;
+}
+
+#multiply,
+#divide,
+#subtract,
+#add {
+  background-color: orange;
+}
+
+#equals {
+  background-color: rgb(22, 87, 147);
+}
+.calculator__container {
+  width: 16rem;
+  height: auto;
+}
+.calculator__controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-areas:
+    "clear clear divide multiply"
+    "seven eight nine subtract"
+    "four five six add"
+    "one two three equals"
+    "zero zero decimal equals";
+  gap: 0.5rem;
+  aspect-ratio: 15.5 / 19.5;
+  width: 100%;
+}
+
+.calculator__button {
+  border-radius: 2rem;
+  border: none;
+  background-color: var(--gray-dark);
   color: white;
+  /* font-weight: 700; */
+  font-size: 1.2rem;
+  opacity: 1;
+}
+.calculator__button:active {
+  opacity: 0.7;
 }
 
-.App-link {
-  color: #61dafb;
+.calculator__button-inactive {
+  opacity: 1;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.calculator__button-active {
+  opacity: 0.7;
+}
+
+.calculator__display {
+  background-color: var(--bg-color);
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  text-align: right;
+  width: 100%;
+}
+
+.calculator__formula {
+  min-height: 4.5rem;
+  font-size: 1.75rem;
+  line-height: 1.8rem;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  display: flex;
+  justify-content: right;
+  align-items: flex-end;
+  flex-flow: row wrap;
+}
+
+.calculator__formula span {
+  text-align: right;
+  overflow-wrap: break-word;
+  word-break: break-all;
+  font-size: 1.6rem;
+  opacity: 0.7;
+}
+
+.calculator__result {
+  height: 2.5rem;
+  font-size: 2rem;
+  line-height: 2.2rem;
+  color: white;
 }
