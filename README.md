@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+<img src="https://github.com/JohnApCo/javascript-calculator/tree/main/public/Javascript-calculator.png?raw=true"></img>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center">Calculator</h1>
 
-## Available Scripts
+<div align="center">
+  <h3>
+    <a href="https://codepen.io/JohnApCo/pen/LYBarrg" color="white">
+      Live
+    </a>
+   <span> | </span>
+    <a href="https://www.freecodecamp.org/learn/front-end-development-libraries/front-end-development-libraries-projects/build-a-javascript-calculator">
+      Challenge
+    </a>
+  </h3>
+</div>
+<div align="center">
+   Solution for a challenge from  <a href="https://www.freecodecamp.org/" target="_blank">freecodecamp.org</a>.
+</div>
+<br>
+<br>
+<br>
 
-In the project directory, you can run:
+## About The Project
 
-### `yarn start`
+<p>This calculator app will be a great test of your CSS and JS skills especially. If you're wanting to practice using Grid, this challenge will be perfect for you!
+The challenge is to build out this calculator app and get it looking as close to the design as possible.
+You can use any tools you like to help you complete the challenge. So if you've got something you'd like to practice, feel free to give it a go.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Users should be able to:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<p><strong>User Story #1:</strong> My calculator should contain a clickable element containing an <code>=</code> (equal sign) with a corresponding <code>id="equals"</code>.</p>
+<p><strong>User Story #2:</strong> My calculator should contain 10 clickable elements containing one number each from 0-9, with the following corresponding IDs: <code>id="zero"</code>, <code>id="one"</code>, <code>id="two"</code>, <code>id="three"</code>, <code>id="four"</code>, <code>id="five"</code>, <code>id="six"</code>, <code>id="seven"</code>, <code>id="eight"</code>, and <code>id="nine"</code>.</p>
+<p><strong>User Story #3:</strong> My calculator should contain 4 clickable elements each containing one of the 4 primary mathematical operators with the following corresponding IDs: <code>id="add"</code>, <code>id="subtract"</code>, <code>id="multiply"</code>, <code>id="divide"</code>.</p>
+<p><strong>User Story #4:</strong> My calculator should contain a clickable element containing a <code>.</code> (decimal point) symbol with a corresponding <code>id="decimal"</code>.</p>
+<p><strong>User Story #5:</strong> My calculator should contain a clickable element with an <code>id="clear"</code>.</p>
+<p><strong>User Story #6:</strong> My calculator should contain an element to display values with a corresponding <code>id="display"</code>.</p>
+<p><strong>User Story #7:</strong> At any time, pressing the <code>clear</code> button clears the input and output values, and returns the calculator to its initialized state; 0 should be shown in the element with the id of <code>display</code>.</p>
+<p><strong>User Story #8:</strong> As I input numbers, I should be able to see my input in the element with the id of <code>display</code>.</p>
+<p><strong>User Story #9:</strong> In any order, I should be able to add, subtract, multiply and divide a chain of numbers of any length, and when I hit <code>=</code>, the correct result should be shown in the element with the id of <code>display</code>.</p>
+<p><strong>User Story #10:</strong> When inputting numbers, my calculator should not allow a number to begin with multiple zeros.</p>
+<p><strong>User Story #11:</strong> When the decimal element is clicked, a <code>.</code> should append to the currently displayed value; two <code>.</code> in one number should not be accepted.</p>
+<p><strong>User Story #12:</strong> I should be able to perform any operation (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>) on numbers containing decimal points.</p>
+<p><strong>User Story #13:</strong> If 2 or more operators are entered consecutively, the operation performed should be the last operator entered (excluding the negative (<code>-</code>) sign). For example, if <code>5 + * 7 =</code> is entered, the result should be <code>35</code> (i.e. <code>5 * 7</code>); if <code>5 * - 5 =</code> is entered, the result should be <code>-25</code> (i.e. <code>5 * (-5)</code>).</p>
+<p><strong>User Story #14:</strong> Pressing an operator immediately following <code>=</code> should start a new calculation that operates on the result of the previous evaluation.</p>
+<p><strong>User Story #15:</strong> My calculator should have several decimal places of precision when it comes to rounding (note that there is no exact standard, but you should be able to handle calculations like <code>2 / 7</code> with reasonable precision to at least 4 decimal places).</p>
 
-### `yarn test`
+## Built with
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Semantic HTML5 markup
+- CSS custom properties
+- Flex
+- Grid
+- Desktop-first workflow
+- React
 
-### `yarn build`
+## What I learned
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+I learned how to do simple math calculations using functions, conditions and performing actions using keyboard. I also tried styled components for the first time, to achieve theme toggle functionality. It turned out to be an amazing experience and I definitely would love to do some more project suing styled components.
