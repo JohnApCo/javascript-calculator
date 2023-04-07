@@ -102,13 +102,12 @@ const calculator = (a = 0, b = 0, operation = "+") => {
       result = a + b;
       break;
   }
-  return `${Math.round(result * 1000000000000) / 1000000000000}`;
+  return `${Math.round(result * 1000000000) / 1000000000}`;
 };
 
 const Button = ({ id, buttonText, keyTrigger, keyPressHandler, ...props }) => {
   const [isActive, setIsActive] = useState(false);
   const buttonEl = useRef(null);
-  /* console.log(buttonEl.current); */
 
   const clickHandler = useCallback(
     (e) => {
@@ -117,8 +116,6 @@ const Button = ({ id, buttonText, keyTrigger, keyPressHandler, ...props }) => {
         index = 0;
       index = buttons.findIndex((el) => el.id === e.target.id);
       keyPress = buttons[index].textButton;
-      /* console.log("currentKey =>", currentKey); */
-      console.log("mouse => ", buttonEl.current);
       keyPressHandler(keyPress);
     },
     [keyPressHandler]
@@ -126,21 +123,14 @@ const Button = ({ id, buttonText, keyTrigger, keyPressHandler, ...props }) => {
 
   useEffect(() => {
     const handleKeydown = (e) => {
-      /*       console.log(
-        "e.key === keyTrigger =>",
-        e.key === keyTrigger,
-        e.key,
-        keyTrigger
-      ); */
+      e.preventDefault();
+      e.target.blur();
       if (e.key === keyTrigger) {
-        /* console.log("keyboard => ", buttonEl.current); */
         let keyPress = "",
           index = 0;
         index = buttons.findIndex((el) => el.keyTrigger === e.key);
-        /* console.log("index => ", index); */
         if (index >= 0) {
           keyPress = buttons[index].textButton;
-          /* console.log("keyPress => ", keyPress); */
           keyPressHandler(keyPress);
           setIsActive(true);
           setTimeout(() => {
@@ -176,71 +166,66 @@ function App() {
   const [currentKey, setCurrentKey] = useState({ key: "", newInput: false });
 
   useEffect(() => {
-    console.log("currentKey", currentKey.key);
-    /************** valor invalido **************/
-    if (
-      !currentKey.newInput ||
-      (/[.]/.test(result) && /[.]/.test(currentKey.key)) ||
-      (currentKey.key === "0" && display === "") ||
-      (/[=]/.test(display) && /[=]/.test(currentKey.key))
-    ) {
-      console.log("invalid");
-      return;
-    }
-    /************** try init with sign **************/
-    if (/^[+]|^[-]|^[÷]|^[×]/.test(display + currentKey.key)) {
-      setDisplay("0" + currentKey.key);
-      return;
-    }
-    /************** Set Result value **************/
-    console.log("display + currentKey =>", display + currentKey.key);
-    let stringResult = /[=]/.test(display + currentKey.key)
-      ? currentKey.key
-      : display + currentKey.key;
-    let newResult =
-      stringResult.match(/(^\d*[.]?\d+|(?<=[-+÷×=])[-]?\d*[.]?\d+|[-+÷×])$/) ||
-      [];
-    if (newResult.length > 0) console.log("newResult", newResult[0]);
-    if (newResult.length > 0) setResult(newResult[0]);
     /************** Erase All **************/
     if (currentKey.key === "AC") {
       setDisplay("");
       setResult("0");
       return;
     }
-    /************** valor signo invalido **************/
-    /* if (/^[+]|^[-]|^[÷]|^[×]/.test(display + currentKey)) {
-          setDisplay("0" + currentKey);
-          return;
-        } */
+    /************** valor invalido **************/
+    if (
+      !currentKey.newInput ||
+      (currentKey.key === "0" && display === "") ||
+      (/[=]/.test(display) && /[=]/.test(currentKey.key)) ||
+      (result.split("").length >= 12 && !/[-+÷×=]/.test(currentKey.key))
+    ) {
+      return;
+    }
     /************** guardar valor para hacer continuar calculando **************/
     if (/[=]/.test(display) && /[-+÷×]/.test(currentKey.key)) {
-      /* console.log("guardar valor para hacer continuar calculando"); */
       setDisplay(result + currentKey.key);
+      setResult(currentKey.key);
       return;
     }
     /************** reset valor para hacer nuevo calculo **************/
     if (/[=]/.test(display) && !/[-+÷×]/.test(currentKey.key)) {
-      /* console.log("reset valor para hacer nuevo calculo"); */
       setDisplay(currentKey.key);
+      setResult(currentKey.key);
       return;
     }
+
+    if (/[.]/.test(result) && /[.]/.test(currentKey.key)) return;
     /************** reemplazo de signo **************/
     if (
       /\d[-+÷×][+÷×]$|\d[+][-]$|\d[-]{2}$|[×÷][-][-]$|[.]{2}$|[-+÷×][=]$/.test(
         display + currentKey.key
       )
     ) {
-      /* console.log("reemplazo de signo ultimo"); */
       setDisplay(display.slice(0, -1) + currentKey.key);
       return;
     }
     if (/\d[×][-][×÷+]$|\d[÷][-][×÷+]$/.test(display + currentKey.key)) {
-      /* console.log("reemplazo de signo segundo"); */
       setDisplay(display.slice(0, -2) + currentKey.key);
       return;
     }
-    /* console.log("todo ok"); */
+    /************** try init with sign **************/
+    if (
+      /^[+]|^[-]|^[÷]|^[×]/.test(display + currentKey.key) &&
+      !/\d[-+÷×]+\d?/.test(display + currentKey.key)
+    ) {
+      setDisplay("0" + currentKey.key);
+      return;
+    }
+    /************** Set Result value **************/
+
+    let stringResult = /[=]/.test(display + currentKey.key)
+      ? currentKey.key
+      : display + currentKey.key;
+    let newResult =
+      stringResult.match(/(^\d*[.]?\d+|(?<=[-+÷×=])[-]?\d*[.]?\d+|[-+÷×])$/) ||
+      [];
+    if (newResult.length > 0) setResult(newResult[0]);
+    /************** valor signo invalido **************/
     setDisplay(display + currentKey.key);
     setCurrentKey({ ...currentKey, newInput: false });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -251,10 +236,8 @@ function App() {
   };
 
   useEffect(() => {
-    let values = display.match(/[+]|[÷]|[×]|[-]?\d*[.]?\d+|[-]/gi);
-    /* console.log(/[=]$/.test(display), values !== null, values.length >= 2); */
+    let values = display.match(/[÷]|[×]|[-]?\d*[.]?\d+([e][+]\d+)?|[-]|[+]/gi);
     if (/[=]$/.test(display) && values !== null && values.length >= 1) {
-      console.log("operando ...");
       let reduceValue = 0;
 
       let idx = values.findIndex((el) => /[×÷]/.test(el));
@@ -278,20 +261,31 @@ function App() {
         }
         return acc;
       }, 0);
-      /* Actualizar el display y el result */
-      setDisplay(display + reduceValue);
+
+      if (
+        (reduceValue.split("").length > 12 &&
+          /[e][+]|\d{2,}[.]\d+/.test(reduceValue)) ||
+        /\d{13,}/.test(reduceValue)
+      )
+        reduceValue = String(Number(reduceValue).toExponential(5));
+      if (
+        reduceValue.split("").length >= 13 &&
+        5 - (13 - reduceValue.split("").length) >= 1 &&
+        /[e][+]|\d{2,}[.]\d+/.test(reduceValue)
+      )
+        reduceValue = String(
+          Number(reduceValue).toExponential(
+            5 - (13 - reduceValue.split("").length)
+          )
+        );
       setResult(reduceValue);
     }
     return () => {};
   }, [display]);
-  /*   const displayHandler = (newDisplay) => {
-    setDisplay(newDisplay);
-  };
-  const resultHandler = (newResult) => {
-    setDisplay(newResult);
-  }; */
+
   return (
     <div className="calculator">
+      <h1 className="calculator__title">Javascript Calculator</h1>
       <div className="calculator__container">
         <div className="calculator__display">
           <div className="calculator__formula">
@@ -313,6 +307,14 @@ function App() {
           ))}
         </div>
       </div>
+      <a
+        href="https://github.com/JohnApCo"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="calculator__author"
+      >
+        by JohnApCo
+      </a>
     </div>
   );
 }
