@@ -1,4 +1,4 @@
-<img src="https://github.com/JohnApCo/javascript-calculator/tree/main/public/Javascript-calculator.png?raw=true"></img>
+<img src="https://raw.githubusercontent.com/JohnApCo/javascript-calculator/main/public/img/Javascript-calculator.png?raw=true"></img>
 
 <h1 align="center">Calculator</h1>
 
